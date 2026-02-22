@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales - Ivo Mahendra</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-chart-line"></i>
+                <span>ivoAnalytics</span>
+            </div>
+            
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="analytics.html" class="nav-item">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Analytics</span>
+                </a>
+                <a href="sales.html" class="nav-item active">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Sales</span>
+                </a>
+                <a href="customers.html" class="nav-item">
+                    <i class="fas fa-users"></i>
+                    <span>Customers</span>
+                </a>
+                <a href="reports.html" class="nav-item">
+                    <i class="fas fa-calendar"></i>
+                    <span>Reports</span>
+                </a>
+                <a href="settings.html" class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <img src="https://ui-avatars.com/api/?name=Ivo+Mahendra&background=6c5ce7&color=fff&size=128" alt="User">
+                    <div>
+                        <h4>Ivo Mahendra</h4>
+                        <p>Admin</p>
+                    </div>
+                </div>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-left">
+                    <button class="menu-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search...">
+                    </div>
+                </div>
+                
+                <div class="header-right">
+                    <button class="notification-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </button>
+                    <button class="theme-toggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Sales Content -->
+            <div class="dashboard-content">
+                <div class="page-header">
+                    <h1>Sales Management</h1>
+                    <button class="btn primary-btn" onclick="openModal('addOrder')">
+                        <i class="fas fa-plus"></i> New Order
+                    </button>
+                </div>
+
+                <!-- Sales Stats -->
+                <div class="stats-grid">
+                    <div class="stat-card" onclick="navigateTo('sales.html')">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Total Sales</h3>
+                            <p class="stat-value">$124,567</p>
+                            <p class="stat-change positive">+18.3%</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card" onclick="navigateTo('sales.html')">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Total Orders</h3>
+                            <p class="stat-value">3,456</p>
+                            <p class="stat-change positive">+12.5%</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card" onclick="navigateTo('sales.html')">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Avg. Order Value</h3>
+                            <p class="stat-value">$189</p>
+                            <p class="stat-change positive">+5.2%</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card" onclick="navigateTo('sales.html')">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Conversion Rate</h3>
+                            <p class="stat-value">3.8%</p>
+                            <p class="stat-change positive">+0.6%</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sales Chart -->
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3>Sales Performance</h3>
+                        <div class="chart-filters">
+                            <select id="salesPeriod" onchange="updateSalesChart()">
+                                <option value="daily">Daily</option>
+                                <option value="weekly" selected>Weekly</option>
+                                <option value="monthly">Monthly</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="salesChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Orders Table -->
+                <div class="data-card">
+                    <div class="data-header">
+                        <h3>All Orders</h3>
+                        <div class="table-actions">
+                            <input type="text" class="search-input" placeholder="Search orders...">
+                            <button class="filter-btn" onclick="filterOrders()">
+                                <i class="fas fa-filter"></i> Filter
+                            </button>
+                            <button class="export-btn" onclick="exportData('orders')">
+                                <i class="fas fa-download"></i> Export
+                            </button>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="orders-table">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Customer</th>
+                                    <th>Date</th>
+                                    <th>Products</th>
+                                    <th>Total</th>
+                                    <th>Payment</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="allOrders">
+                                <!-- Data akan diisi JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pagination">
+                        <button class="page-btn" onclick="changePage('prev')"><i class="fas fa-chevron-left"></i></button>
+                        <span class="page-info">Page 1 of 10</span>
+                        <button class="page-btn" onclick="changePage('next')"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Home Button -->
+            <div class="bottom-home">
+                <a href="index.html" class="home-btn">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal for New Order -->
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Create New Order</h2>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <form id="orderForm" onsubmit="createOrder(event)">
+                <div class="form-group">
+                    <label>Customer Name</label>
+                    <input type="text" required>
+                </div>
+                <div class="form-group">
+                    <label>Products</label>
+                    <select multiple>
+                        <option>iPhone 13 Pro - $999</option>
+                        <option>MacBook Pro - $1299</option>
+                        <option>AirPods Pro - $249</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Payment Method</label>
+                    <select>
+                        <option>Credit Card</option>
+                        <option>Bank Transfer</option>
+                        <option>Cash</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn secondary-btn" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="btn primary-btn">Create Order</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Ivo Mahendra</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-chart-line"></i>
+                <span>ivoAnalytics</span>
+            </div>
+            
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="analytics.html" class="nav-item">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Analytics</span>
+                </a>
+                <a href="sales.html" class="nav-item">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Sales</span>
+                </a>
+                <a href="customers.html" class="nav-item">
+                    <i class="fas fa-users"></i>
+                    <span>Customers</span>
+                </a>
+                <a href="reports.html" class="nav-item">
+                    <i class="fas fa-calendar"></i>
+                    <span>Reports</span>
+                </a>
+                <a href="settings.html" class="nav-item active">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <img src="https://ui-avatars.com/api/?name=Ivo+Mahendra&background=6c5ce7&color=fff&size=128" alt="User">
+                    <div>
+                        <h4>Ivo Mahendra</h4>
+                        <p>Admin</p>
+                    </div>
+                </div>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-left">
+                    <button class="menu-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search...">
+                    </div>
+                </div>
+                
+                <div class="header-right">
+                    <button class="notification-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </button>
+                    <button class="theme-toggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Settings Content -->
+            <div class="dashboard-content">
+                <div class="page-header">
+                    <h1>Settings</h1>
+                    <button class="btn primary-btn" onclick="saveSettings()">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </div>
+
+                <!-- Settings Tabs -->
+                <div class="settings-tabs">
+                    <button class="tab-btn active" onclick="switchTab('profile')">
+                        <i class="fas fa-user"></i> Profile
+                    </button>
+                    <button class="tab-btn" onclick="switchTab('notifications')">
+                        <i class="fas fa-bell"></i> Notifications
+                    </button>
+                    <button class="tab-btn" onclick="switchTab('security')">
+                        <i class="fas fa-lock"></i> Security
+                    </button>
+                    <button class="tab-btn" onclick="switchTab('preferences')">
+                        <i class="fas fa-sliders-h"></i> Preferences
+                    </button>
+                    <button class="tab-btn" onclick="switchTab('team')">
+                        <i class="fas fa-users-cog"></i> Team
+                    </button>
+                    <button class="tab-btn" onclick="switchTab('billing')">
+                        <i class="fas fa-credit-card"></i> Billing
+                    </button>
+                </div>
+
+                <!-- Profile Settings -->
+                <div id="profile" class="settings-section active">
+                    <div class="settings-card">
+                        <h3>Profile Information</h3>
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" value="Ivo Mahendra" placeholder="Enter your full name">
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" value="ivo.mahendra@example.com" placeholder="Enter your email">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="tel" value="+62 812-2511-0044" placeholder="Enter your phone number">
+                        </div>
+                        <div class="form-group">
+                            <label>Bio</label>
+                            <textarea rows="4" placeholder="Tell us about yourself">Web Developer & Designer with passion for creating amazing digital experiences.</textarea>
+                        </div>
+                    </div>
+
+                    <div class="settings-card">
+                        <h3>Profile Picture</h3>
+                        <div class="profile-picture-section">
+                            <img src="https://ui-avatars.com/api/?name=Ivo+Mahendra&background=6c5ce7&color=fff&size=128" alt="Profile" class="profile-preview">
+                            <div class="profile-actions">
+                                <button class="btn secondary-btn" onclick="uploadPhoto()">
+                                    <i class="fas fa-upload"></i> Upload Photo
+                                </button>
+                                <button class="btn secondary-btn" onclick="removePhoto()">
+                                    <i class="fas fa-trash"></i> Remove
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notification Settings -->
+                <div id="notifications" class="settings-section">
+                    <div class="settings-card">
+                        <h3>Email Notifications</h3>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>New Orders</h4>
+                                <p>Get notified when a new order is placed</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>New Customers</h4>
+                                <p>Get notified when a new customer registers</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Weekly Reports</h4>
+                                <p>Receive weekly analytics reports</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="settings-card">
+                        <h3>Push Notifications</h3>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Browser Notifications</h4>
+                                <p>Receive notifications in your browser</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Desktop Notifications</h4>
+                                <p>Receive system notifications</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Sound Alerts</h4>
+                                <p>Play sound for important notifications</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Settings -->
+                <div id="security" class="settings-section">
+                    <div class="settings-card">
+                        <h3>Change Password</h3>
+                        <div class="form-group">
+                            <label>Current Password</label>
+                            <input type="password" placeholder="Enter current password">
+                        </div>
+                        <div class="form-group">
+                            <label>New Password</label>
+                            <input type="password" placeholder="Enter new password">
+                        </div>
+                        <div class="form-group">
+                            <label>Confirm New Password</label>
+                            <input type="password" placeholder="Confirm new password">
+                        </div>
+                        <button class="btn primary-btn" onclick="changePassword()">
+                            <i class="fas fa-key"></i> Update Password
+                        </button>
+                    </div>
+
+                    <div class="settings-card">
+                        <h3>Two-Factor Authentication</h3>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Enable 2FA</h4>
+                                <p>Add an extra layer of security to your account</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <p class="security-note">When enabled, you'll need to enter a verification code from your authenticator app when logging in.</p>
+                    </div>
+
+                    <div class="settings-card">
+                        <h3>Active Sessions</h3>
+                        <div class="session-item">
+                            <div class="session-info">
+                                <i class="fas fa-laptop"></i>
+                                <div>
+                                    <h4>Windows PC - Chrome</h4>
+                                    <p>Jakarta, Indonesia • Current session</p>
+                                </div>
+                            </div>
+                            <span class="session-status active">Active</span>
+                        </div>
+                        <div class="session-item">
+                            <div class="session-info">
+                                <i class="fas fa-mobile-alt"></i>
+                                <div>
+                                    <h4>iPhone 13 - Safari</h4>
+                                    <p>Jakarta, Indonesia • 2 hours ago</p>
+                                </div>
+                            </div>
+                            <button class="btn-link" onclick="revokeSession()">Revoke</button>
+                        </div>
+                        <button class="btn secondary-btn" onclick="revokeAllSessions()">
+                            <i class="fas fa-sign-out-alt"></i> Sign Out All Devices
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Preferences Settings -->
+                <div id="preferences" class="settings-section">
+                    <div class="settings-card">
+                        <h3>Display Settings</h3>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Dark Mode</h4>
+                                <p>Toggle dark/light theme</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="darkModeToggle">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>Language</label>
+                            <select>
+                                <option value="en">English</option>
+                                <option value="id" selected>Indonesia</option>
+                                <option value="es">Español</option>
+                                <option value="fr">Français</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Date Format</label>
+                            <select>
+                                <option value="dmy">DD/MM/YYYY</option>
+                                <option value="mdy">MM/DD/YYYY</option>
+                                <option value="ymd">YYYY/MM/DD</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Time Zone</label>
+                            <select>
+                                <option value="wib" selected>WIB (UTC+7)</option>
+                                <option value="wita">WITA (UTC+8)</option>
+                                <option value="wit">WIT (UTC+9)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="settings-card">
+                        <h3>Dashboard Preferences</h3>
+                        <div class="form-group">
+                            <label>Default Dashboard View</label>
+                            <select>
+                                <option value="overview">Overview</option>
+                                <option value="analytics">Analytics</option>
+                                <option value="sales">Sales</option>
+                                <option value="customers">Customers</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Auto-refresh Data</h4>
+                                <p>Automatically refresh dashboard data</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>Refresh Interval (seconds)</label>
+                            <select>
+                                <option value="30">30 seconds</option>
+                                <option value="60" selected>60 seconds</option>
+                                <option value="120">2 minutes</option>
+                                <option value="300">5 minutes</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Settings -->
+                <div id="team" class="settings-section">
+                    <div class="settings-card">
+                        <div class="data-header">
+                            <h3>Team Members</h3>
+                            <button class="btn primary-btn" onclick="inviteMember()">
+                                <i class="fas fa-user-plus"></i> Invite Member
+                            </button>
+                        </div>
+                        <div class="team-list">
+                            <div class="team-item">
+                                <img src="https://ui-avatars.com/api/?name=John+Doe&background=6c5ce7&color=fff&size=128" alt="Team Member">
+                                <div class="team-info">
+                                    <h4>John Doe</h4>
+                                    <p>john.doe@example.com</p>
+                                    <span class="role-badge admin">Admin</span>
+                                </div>
+                                <div class="team-actions">
+                                    <button class="btn-icon" onclick="editMember('john')">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon" onclick="removeMember('john')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="team-item">
+                                <img src="https://ui-avatars.com/api/?name=Jane+Smith&background=00cec9&color=fff&size=128" alt="Team Member">
+                                <div class="team-info">
+                                    <h4>Jane Smith</h4>
+                                    <p>jane.smith@example.com</p>
+                                    <span class="role-badge editor">Editor</span>
+                                </div>
+                                <div class="team-actions">
+                                    <button class="btn-icon" onclick="editMember('jane')">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon" onclick="removeMember('jane')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="team-item">
+                                <img src="https://ui-avatars.com/api/?name=Mike+Johnson&background=fdcb6e&color=fff&size=128" alt="Team Member">
+                                <div class="team-info">
+                                    <h4>Mike Johnson</h4>
+                                    <p>mike.johnson@example.com</p>
+                                    <span class="role-badge viewer">Viewer</span>
+                                </div>
+                                <div class="team-actions">
+                                    <button class="btn-icon" onclick="editMember('mike')">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon" onclick="removeMember('mike')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-card">
+                        <h3>Roles & Permissions</h3>
+                        <div class="permission-item">
+                            <div class="permission-info">
+                                <h4>Admin</h4>
+                                <p>Full access to all features and settings</p>
+                            </div>
+                            <span class="permission-count">2 members</span>
+                        </div>
+                        <div class="permission-item">
+                            <div class="permission-info">
+                                <h4>Editor</h4>
+                                <p>Can edit content but cannot change settings</p>
+                            </div>
+                            <span class="permission-count">3 members</span>
+                        </div>
+                        <div class="permission-item">
+                            <div class="permission-info">
+                                <h4>Viewer</h4>
+                                <p>Can only view data, no editing permissions</p>
+                            </div>
+                            <span class="permission-count">5 members</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Billing Settings -->
+                <div id="billing" class="settings-section">
+                    <div class="settings-card">
+                        <h3>Current Plan</h3>
+                        <div class="plan-card">
+                            <div class="plan-info">
+                                <h4>Professional Plan</h4>
+                                <p class="plan-price">$29.99 <span>/month</span></p>
+                                <ul class="plan-features">
+                                    <li><i class="fas fa-check"></i> Up to 10 team members</li>
+                                    <li><i class="fas fa-check"></i> Advanced analytics</li>
+                                    <li><i class="fas fa-check"></i> Custom reports</li>
+                                    <li><i class="fas fa-check"></i> Priority support</li>
+                                </ul>
+                            </div>
+                            <button class="btn primary-btn" onclick="upgradePlan()">
+                                <i class="fas fa-arrow-up"></i> Upgrade Plan
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="settings-card">
+                        <h3>Payment Methods</h3>
+                        <div class="payment-method">
+                            <i class="fas fa-credit-card"></i>
+                            <div class="payment-info">
+                                <h4>Visa ending in 4242</h4>
+                                <p>Expires 12/25</p>
+                            </div>
+                            <span class="payment-default">Default</span>
+                            <button class="btn-link" onclick="editPayment()">Edit</button>
+                        </div>
+                        <button class="btn secondary-btn" onclick="addPaymentMethod()">
+                            <i class="fas fa-plus"></i> Add Payment Method
+                        </button>
+                    </div>
+
+                    <div class="settings-card">
+                        <h3>Billing History</h3>
+                        <div class="billing-history">
+                            <div class="billing-item">
+                                <div class="billing-info">
+                                    <h4>Professional Plan - March 2025</h4>
+                                    <p>Mar 1, 2025</p>
+                                </div>
+                                <span class="billing-amount">$29.99</span>
+                                <span class="billing-status paid">Paid</span>
+                                <button class="btn-link" onclick="downloadInvoice()">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                            <div class="billing-item">
+                                <div class="billing-info">
+                                    <h4>Professional Plan - February 2025</h4>
+                                    <p>Feb 1, 2025</p>
+                                </div>
+                                <span class="billing-amount">$29.99</span>
+                                <span class="billing-status paid">Paid</span>
+                                <button class="btn-link" onclick="downloadInvoice()">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                            <div class="billing-item">
+                                <div class="billing-info">
+                                    <h4>Professional Plan - January 2025</h4>
+                                    <p>Jan 1, 2025</p>
+                                </div>
+                                <span class="billing-amount">$29.99</span>
+                                <span class="billing-status paid">Paid</span>
+                                <button class="btn-link" onclick="downloadInvoice()">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <button class="btn secondary-btn" onclick="viewAllInvoices()">
+                            View All Invoices
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Home Button -->
+            <div class="bottom-home">
+                <a href="index.html" class="home-btn">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
